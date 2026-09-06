@@ -25,8 +25,8 @@ De C++ a Python, JavaScript y Rust, sin perder la cabeza.
 
 ## 🎥 Demo del Pipeline
 
-![Pipeline en acción](Peek 2026-09-06 09-20.gif)
-![Pipeline en acciónX2](Peek 2026-09-06 09-24.gif)
+![Pipeline en acción](Peek%202026-09-06%2009-20.gif)
+![Pipeline en acción X2](Peek%202026-09-06%2009-24.gif)
 
 
 
