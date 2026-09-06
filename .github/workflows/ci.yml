@@ -2,36 +2,153 @@ name: Esclarificador CI
 
 on:
   push:
+    branches: [main]
   pull_request:
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  build:
+    name: Build generated targets
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.6.0
         with:
-          python-version: "3.10"
+          python-version: "3.10.16"
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
-          node-version: "18"
+          node-version: "18.20.8"
 
       - name: Set up Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@3230091d7ef9483f601620abacc570c22cf44d22
+
+      - name: Cache tool dependencies
+        uses: actions/cache@v4.2.3
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.npm
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-tooling-${{ hashFiles('**/requirements*.txt', '**/package-lock.json', '**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-tooling-
+
+      - name: Run complete pipeline
+        run: ./run.sh --ci run
+
+  test:
+    name: Run test suite
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    needs: build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.10.16"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: "18.20.8"
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@3230091d7ef9483f601620abacc570c22cf44d22
+
+      - name: Cache tool dependencies
+        uses: actions/cache@v4.2.3
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.npm
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-tooling-${{ hashFiles('**/requirements*.txt', '**/package-lock.json', '**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-tooling-
 
       - name: Run tests through the project wrapper
         run: ./run.sh --ci test
 
       - name: Upload logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: esclarificador-logs
           path: output/logs.txt
           if-no-files-found: ignore
+          retention-days: 7
+
+  audit:
+    name: Audit dependencies and repository inputs
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.10.16"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: "18.20.8"
+
+      - name: Scan repository for common secret patterns
+        run: |
+          if git grep -n -I -E \
+            '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}' \
+            -- ':!*.gif'; then
+            echo "Potential hardcoded secret detected."
+            exit 1
+          fi
+
+      - name: Audit Python dependencies when declared
+        run: |
+          if compgen -G 'requirements*.txt' > /dev/null || test -f pyproject.toml; then
+            python -m pip install --disable-pip-version-check pip-audit
+            pip-audit
+          else
+            echo "No Python dependency manifest found; skipping pip-audit."
+          fi
+
+      - name: Audit npm dependencies when declared
+        run: |
+          if test -f package-lock.json || test -f npm-shrinkwrap.json; then
+            npm audit --audit-level=high
+          else
+            echo "No npm lockfile found; skipping npm audit."
+          fi
+
+      - name: Audit Rust dependencies when declared
+        run: |
+          if test -f Cargo.toml || test -f Cargo.lock; then
+            cargo install --locked cargo-audit
+            cargo audit
+          else
+            echo "No Rust manifest found; skipping cargo audit."
+          fi
