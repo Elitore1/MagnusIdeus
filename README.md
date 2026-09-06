@@ -403,6 +403,35 @@ Consultá `CHANGELOG.md` para conocer la evolución del proyecto.
 
     Hacer un pull request
 
+## 🔒 Auditoría y Seguridad
+
+El proyecto utiliza **CI/CD con auditoría de dependencias y detección de
+secretos**. Las acciones del workflow principal están fijadas a versiones
+concretas y la acción de Rust está fijada a un SHA inmutable para reducir el
+riesgo de supply chain.
+
+| Herramienta | Propósito | Estado |
+|---|---|---|
+| GitHub Actions | CI/CD | ✅ Versiones fijadas; Rust fijado a SHA |
+| Dependabot | Actualizaciones de Actions | ✅ Configurado semanalmente |
+| CodeQL | Análisis de seguridad | ⚙️ Activar en **Settings → Code security** |
+| Secret scanning | Detección de secretos | ⚙️ Activar en **Settings → Code security** |
+| Auditoría CI | Patrones de secretos y dependencias | ✅ Ejecutada en cada workflow |
+
+### Buenas prácticas implementadas
+
+- ✅ No se detectaron secretos en los archivos rastreados.
+- ✅ `.gitignore` excluye archivos sensibles, binarios y temporales.
+- ✅ Los scripts no contienen credenciales.
+- ✅ El workflow usa `contents: read` y no solicita permisos de escritura.
+- ✅ Los logs y artefactos publicados se limitan a `output/logs.txt`.
+- ✅ Las dependencias se auditan con `pip-audit`, `npm audit` o `cargo audit`
+  cuando existen manifiestos para el ecosistema correspondiente.
+
+El escaneo de secretos y CodeQL son funciones de seguridad de GitHub que deben
+habilitarse en la configuración del repositorio; el archivo de workflow no
+puede activarlas por sí solo.
+
 📄 Licencia
 
 MIT License. Podés usarlo, modificarlo y compartirlo libremente.
