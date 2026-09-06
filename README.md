@@ -1,88 +1,150 @@
-# Esclarificador - Transpilador de C++ a Múltiples Lenguajes
+# 🧠 Esclarificador
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Rust 1.70+](https://img.shields.io/badge/rust-1.70+-orange.svg)](https://www.rust-lang.org/)
-[![Node.js 16+](https://img.shields.io/badge/node-16+-green.svg)](https://nodejs.org/)
+**"De C++ a Python, JavaScript y Rust, sin perder la cabeza."**
 
-## 🚀 Descripción
+---
 
-**Esclarificador** es un transpilador experimental que convierte código C++ en Python, JavaScript y Rust. Utiliza un sistema de mapeos basado en "abstracciones" para traducir clases y métodos entre lenguajes.
+## 🤔 ¿Qué es esto?
 
-## 📋 Características
+Imagina que escribes un programa en C++ y quieres ver cómo se vería en Python, JavaScript o Rust. Normalmente tendrías que traducirlo a mano, línea por línea.
 
-- ✅ Interpreta código C++ (basado en regex, soporte para C++ simple)
-- ✅ Genera código en **Python**, **JavaScript** y **Rust**
-- ✅ Sistema de mapeos configurable (`config/mappings.json`)
-- ✅ Pipeline completo con un solo comando
-- ✅ Logging detallado por pasos
-- ✅ Salida ejecutable en los 3 lenguajes
+**Esclarificador** hace esa traducción por ti. No es perfecto, pero es un comienzo. Y lo mejor: **aprende mientras lo usas**.
 
-## 🏗️ Estructura del Proyecto
+---
 
-Esclarificador1/
-├── bridge/ # ✅ Código principal
-│ ├── interpreter.py # Genera AST desde C++
-│ ├── generator.py # Genera código multi-lenguaje
-│ └── main.py # Punto de entrada unificado
+## 🎯 ¿Qué hace exactamente?
+
+1. **Lee** tu código C++ (por ahora, clases simples con métodos y atributos).
+2. **Interpreta** ese código y lo convierte en una estructura intermedia (AST).
+3. **Genera** código equivalente en:
+   - 🐍 Python
+   - 📜 JavaScript
+   - 🦀 Rust
+4. **Ejecuta** el código generado para que veas que funciona.
+
+---
+
+## 🧱 ¿Cómo está organizado?
+esclarificador/
+├── bridge/ # ✅ El cerebro del proyecto (ACTIVO)
+│ ├── interpreter.py # Lee C++ y crea un AST
+│ ├── generator.py # Convierte el AST en código
+│ └── main.py # Punto de entrada unificado (NUEVO)
 ├── config/
-│ └── mappings.json # Mapeos de abstracciones
+│ └── mappings.json # Aquí defines cómo se traduce cada cosa
 ├── src/
-│ └── idea.cpp # Código fuente C++ (entrada)
+│ └── idea.cpp # El código C++ que quieres traducir
 ├── output/
-│ └── generated/
-│ ├── idea.py # Código Python generado
-│ ├── idea.js # Código JavaScript generado
-│ └── idea.rs # Código Rust generado
-├── run.sh # Pipeline completo
-├── commands.sh # Comandos rápidos
-└── README.md
-text
+│ └── generated/ # Aquí aparecen los archivos generados
+│ ├── idea.py
+│ ├── idea.js
+│ └── idea.rs
+└── README.md # Esto que estás leyendo
+
+**Nota:** `run.sh` y `commands.sh` ya no se usan. Todo se maneja desde `bridge/main.py`.
+
+---
+
+## 🚀 ¿Cómo lo uso?
+
+### 1. Clona el repositorio
 
 
-## 🔧 Requisitos
 
-- Python 3.8+
-- Node.js 16+ (opcional, para JavaScript)
-- Rust 1.70+ (opcional, para compilar Rust)
-
-## 🚀 Uso Rápido
-
-```bash
-# 1. Clonar el repositorio
 git clone https://github.com/tu-usuario/esclarificador.git
 cd esclarificador
+2. Asegúrate de tener lo necesario
 
-# 2. Ejecutar el pipeline completo
-./run.sh
+    Python 3.8 o superior
 
-# 3. O usar comandos individuales
+    (Opcional) Node.js para ejecutar JavaScript
+
+    (Opcional) Rust para compilar y ejecutar Rust
+
+3. Ejecuta el pipeline completo
+
 python3 bridge/main.py run
+
+Este comando hace todo automáticamente:
+
+    Lee src/idea.cpp
+
+    Genera los archivos en output/generated/
+
+    Ejecuta el código generado
+    
+4. Comandos disponibles
+
+# Pipeline completo
+python3 bridge/main.py run
+
+# Solo interpretar (C++ → AST)
+python3 bridge/main.py interpret
+
+# Generar un lenguaje específico
 python3 bridge/main.py generate --lang python
 python3 bridge/main.py generate --lang js
 python3 bridge/main.py generate --lang rust
+
+# Compilar Rust
 python3 bridge/main.py compile
 
-📖 Comandos Disponibles
-bash
+# Limpiar archivos generados
+python3 bridge/main.py clean
 
-# Pipeline completo
-./run.sh
+# Ver ayuda
+python3 bridge/main.py --help
 
-# Comandos individuales
-python3 bridge/main.py interpret      # Solo interpretar C++ → AST
-python3 bridge/main.py generate --lang python  # Generar Python
-python3 bridge/main.py generate --lang js      # Generar JavaScript
-python3 bridge/main.py generate --lang rust    # Generar Rust
-python3 bridge/main.py compile         # Compilar Rust
-python3 bridge/main.py clean           # Limpiar archivos generados
-python3 bridge/main.py --help          # Mostrar ayuda
+5. Explora los resultados
 
-📝 Ejemplo de Código C++ (src/idea.cpp)
-cpp
+# Ver el código Python generado
+cat output/generated/idea.py
 
-#include <iostream>
-#include <chrono>
-#include <vector>
+# Ver el código JavaScript generado
+cat output/generated/idea.js
+
+# Ver el código Rust generado
+cat output/generated/idea.rs
+
+# Ejecutar Python
+python3 output/generated/idea.py
+
+# Ejecutar JavaScript
+node output/generated/idea.js
+
+# Compilar y ejecutar Rust
+rustc output/generated/idea.rs -o output/generated/idea
+./output/generated/idea
+
+🧪 ¿Cómo personalizo la traducción?
+
+El archivo config/mappings.json es el diccionario que usa Esclarificador para traducir.
+
+{
+  "abstracciones": {
+    "Tanger": {
+      "descripcion": "Identificación del problema",
+      "python": "Problem",
+      "js": "Problem",
+      "rust": "Problem"
+    }
+  },
+  "std_namespaces": {
+    "vector": {
+      "python": "list",
+      "js": "Array",
+      "rust": "std::vec::Vec"
+    }
+  }
+}
+
+
+
+Si quieres que una clase C++ se llame diferente en Python, solo cambias el valor de "python". Fácil.
+
+
+📖 Ejemplo práctico
+Entrada (src/idea.cpp)
 
 class Tanger {
 public:
@@ -90,15 +152,8 @@ public:
     void diagnosticar() { std::cout << "Problema identificado\n"; }
 };
 
-class Espejo {
-public:
-    void analizar(Tanger& t) { std::cout << "Analizando: " << t.problema << "\n"; }
-};
-// ... más clases
+Salida (Python)
 
-🎯 Salida Generada
-Python
-python
 
 class Problem:
     def __init__(self):
@@ -106,9 +161,10 @@ class Problem:
     def diagnosticar(self):
         print("🔍 Diagnosticando Tanger...")
         return True
+        
+        
+Salida (JavaScript)
 
-JavaScript
-javascript
 
 class Problem {
     constructor() {
@@ -120,8 +176,9 @@ class Problem {
     }
 }
 
-Rust
-rust
+
+
+Salida (Rust)
 
 struct Problem {
     problema: String,
@@ -137,10 +194,14 @@ impl Problem {
     }
 }
 
+
+
+
 📊 Logs
 
 El pipeline registra cada paso en output/logs.txt:
-text
+
+
 
 [2026-09-06 05:56:59] [INFO] === NUEVA EJECUCIÓN ===
 [2026-09-06 05:56:59] [STEP] 📖 PASO 1: Interpretando C++...
@@ -152,37 +213,54 @@ text
 [2026-09-06 05:57:00] [STEP] ▶️ PASO 4: Ejecutando ejemplos...
 [2026-09-06 05:57:00] [OK] ✅ ¡Pipeline completado!
 
-⚠️ Limitaciones Conocidas
 
-    Parser basado en expresiones regulares (no soporta C++ complejo)
 
-    No soporta templates, herencia múltiple, etc.
 
-    Advertencias en Rust por imports no utilizados (no críticas)
+⚠️ ¿Qué NO puede hacer (todavía)?
 
-🛣️ Próximos Pasos
+    ❌ Leer C++ complejo con templates o herencia múltiple.
 
-    □
+    ❌ Traducir código con punteros o referencias complejas.
 
-    Mejorar parser con AST completo
-    □
+    ❌ Entender #include más allá de los namespaces básicos.
 
-    Soporte para más tipos de datos
-    □
+    ❌ Generar código con la lógica exacta de los métodos originales.
 
-    Generación de código con herencia
-    □
+Pero sí puede traducir la estructura de tus clases, y eso ya es un montón.
 
-    Tests unitarios
-    □
 
-    Interfaz web
 
+
+🧠 ¿Cómo aprendo más?
+
+Este proyecto está diseñado para que puedas meterle mano sin miedo.
+
+    Si quieres entender cómo se interpreta el código, abre bridge/interpreter.py.
+
+    Si quieres modificar cómo se genera el código, abre bridge/generator.py.
+
+    Si quieres agregar un nuevo lenguaje, mira cómo funciona generator.py y agrega tu propio método _generate_tu_lenguaje().
+    
+    
+    
+    
+🤝 ¿Quieres contribuir?
+
+¡Bienvenido! Esto es un proyecto abierto. Puedes:
+
+    Hacer un fork
+
+    Crear una rama (git checkout -b mi-mejora)
+
+    Hacer tus cambios
+
+    Hacer un pull request
+    
+    
+    
+    
 📄 Licencia
 
-MIT License - ver LICENSE para más detalles.
-🤝 Contribuciones
+MIT License. Puedes usarlo, modificarlo y compartirlo libremente.
 
-Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir cambios significativos.
-
-Estado: ✅ OPERATIVO - Transpilador experimental de C++ a Python/JavaScript/Rust
+Esclarificador — Un proyecto para aprender, experimentar y divertirse.
