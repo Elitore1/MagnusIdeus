@@ -62,42 +62,47 @@ De C++ a Python, JavaScript y Rust, sin perder la cabeza.
 
 ## 🧱 Cómo está organizado
 
+```text
 esclarificador/
 ├── .github/
-│ └── workflows/
-│ └── ci.yml # CI/CD con GitHub Actions
-├── bridge/ # 🧠 Cerebro del proyecto (activo)
-│ ├── interpreter.py # Lee C++ y crea un AST
-│ ├── generator.py # Convierte el AST en código
-│ └── main.py # Punto de entrada unificado
-├── scripts/ # 🛠️ Scripts modulares
-│ ├── run.sh # Wrapper principal
-│ └── lib/
-│ ├── colors.sh # Colores para output
-│ ├── utils.sh # Utilidades
-│ ├── test_runner.sh # Lógica de tests
-│ └── pipeline.sh # Lógica del pipeline
-├── tests/ # 🧪 Tests automatizados
-│ ├── test_interpreter.py
-│ ├── test_generator.py
-│ ├── test_pipeline.py
-│ └── run_tests.py
+│   └── workflows/
+│       └── ci.yml                 # CI/CD con GitHub Actions
+├── bridge/                         # 🧠 Cerebro del proyecto
+│   ├── interpreter.py              # Lee C++ y crea un AST
+│   ├── generator.py                # Convierte el AST en código
+│   ├── main.py                     # Punto de entrada del pipeline
+│   └── tokenizer.py                # Extrae tokens de C++
+├── scripts/                        # 🛠️ Scripts modulares
+│   ├── run.sh                      # Wrapper principal
+│   └── lib/
+│       ├── colors.sh               # Colores de salida
+│       ├── utils.sh                # Utilidades generales
+│       ├── test_runner.sh          # Lógica de tests
+│       └── pipeline.sh             # Lógica del pipeline
+├── tests/                          # 🧪 Tests automatizados
+│   ├── test_interpreter.py
+│   ├── test_generator.py
+│   ├── test_pipeline.py
+│   └── run_tests.py
 ├── config/
-│ └── mappings.json # Cómo se traduce cada cosa
+│   └── mappings.json               # Reglas de traducción
 ├── src/
-│ └── idea.cpp # El C++ que quieres traducir
+│   └── idea.cpp                    # Código C++ de entrada
 ├── output/
-│ └── generated/ # Archivos generados
-│ ├── idea.py
-│ ├── idea.js
-│ └── idea.rs
-├── docs/ # GitHub Pages
-│ ├── _config.yml
-│ └── index.html
-├── run.sh # 🔗 Enlace a scripts/run.sh
+│   └── generated/                  # Código generado
+│       ├── idea.py
+│       ├── idea.js
+│       ├── idea.rs
+│       └── .gitkeep
+├── docs/                           # GitHub Pages y demos
+│   ├── _config.yml
+│   ├── index.html
+│   └── *.gif
+├── CHANGELOG.md                    # Historial de versiones
+├── run.sh                          # Enlace a scripts/run.sh
 ├── LICENSE
 └── README.md
-text
+```
 
 
 El punto de entrada es `./run.sh`, que ejecuta el pipeline completo.
