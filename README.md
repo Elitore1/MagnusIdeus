@@ -15,6 +15,21 @@
 Esclarificador soporta un **subconjunto de C++ simple**, principalmente clases con atributos, métodos e includes básicos, y genera código equivalente en otros lenguajes. No es un compilador completo: es un transpilador experimental para aprender y experimentar.
 
 ---
+# Esclarificador
+
+De C++ a Python, JavaScript y Rust, sin perder la cabeza.
+
+[![CI](https://github.com/Elitore1/MagnusIdeus/actions/workflows/ci.yml/badge.svg)](https://github.com/Elitore1/MagnusIdeus/actions/workflows/ci.yml)
+
+---
+
+## 🎥 Demo del Pipeline
+
+![Pipeline en acción](Peek 2026-09-06 09-20.gif)
+![Pipeline en acciónX2](Peek 2026-09-06 09-24.gif)
+
+
+
 
 ## 📋 Tabla de Contenidos
 
