@@ -51,7 +51,7 @@ esclarificador/
 
 
 
-git clone https://github.com/tu-usuario/esclarificador.git
+git clone https://github.com/Elitore1/MagnusIdeus.git
 cd esclarificador
 2. Asegúrate de tener lo necesario
 
