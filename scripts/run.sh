@@ -4,8 +4,18 @@
 
 set -e
 
-# Cargar módulos
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Cargar módulos. Resolver el enlace raíz run.sh antes de localizar lib/.
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+while [ -h "$SCRIPT_PATH" ]; do
+    SCRIPT_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" >/dev/null 2>&1 && pwd)"
+    LINK_TARGET="$(readlink "$SCRIPT_PATH")"
+    if [[ "$LINK_TARGET" != /* ]]; then
+        SCRIPT_PATH="$SCRIPT_DIR/$LINK_TARGET"
+    else
+        SCRIPT_PATH="$LINK_TARGET"
+    fi
+done
+SCRIPT_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" >/dev/null 2>&1 && pwd)"
 LIB_DIR="$SCRIPT_DIR/lib"
 
 source "$LIB_DIR/colors.sh"

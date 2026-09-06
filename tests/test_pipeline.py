@@ -6,6 +6,17 @@ import sys
 from pathlib import Path
 
 class TestPipeline(unittest.TestCase):
+    def setUp(self):
+        """Preparar los artefactos intermedios sin depender del orden de tests."""
+        root = Path(__file__).parent.parent
+        result = subprocess.run(
+            ["python3", "bridge/interpreter.py"],
+            capture_output=True,
+            text=True,
+            cwd=root
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_interpreter_runs(self):
         """Verificar que el intérprete se ejecuta sin errores"""
         result = subprocess.run(

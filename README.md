@@ -64,6 +64,23 @@ python3 bridge/main.py run
 
 Eso lee `src/idea.cpp`, genera archivos en `output/generated/` y los ejecuta.
 
+### Wrapper `run.sh`
+
+El wrapper raíz delega en `scripts/run.sh` y ofrece una forma cómoda de ejecutar
+el pipeline y sus verificaciones:
+
+```bash
+./run.sh                  # Pipeline completo
+./run.sh --verbose        # Pipeline con salida detallada
+./run.sh --show-log       # Muestra el log completo al finalizar
+./run.sh --ci test        # Ejecuta los tests en modo CI
+./run.sh --test-runner unittest test
+```
+
+`--test-runner` acepta `auto`, `pytest`, `unittest` o `custom`. En modo `auto`
+se elige el runner disponible según los archivos del proyecto. El workflow de
+GitHub Actions ejecuta `./run.sh --ci test` en cada push y pull request.
+
 ### Comandos
 
 | Comando | Qué hace |
