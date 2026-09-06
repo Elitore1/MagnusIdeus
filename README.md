@@ -2,7 +2,7 @@
 
 De C++ a Python, JavaScript y Rust, sin perder la cabeza.
 
-Esclarificador lee un programa en C++ (clases simples) y genera código equivalente en otros lenguajes. No es un compilador completo: es un transpilador experimental para aprender y experimentar.
+Esclarificador soporta un **subconjunto de C++ simple**, principalmente clases con atributos, métodos e includes básicos, y genera código equivalente en otros lenguajes. No es un compilador completo: es un transpilador experimental para aprender y experimentar.
 
 ## Qué hace
 
@@ -31,7 +31,7 @@ esclarificador/
 └── README.md               ←  esto que estás leyendo
 ```
 
-El punto de entrada es `python3 bridge/main.py`. `./run.sh` es un atajo opcional al pipeline completo.
+El punto de entrada es `./run.sh`, que ejecuta el pipeline completo.
 
 ## Cómo usarlo
 
@@ -59,7 +59,7 @@ cd esclarificador
 3. Ejecuta el pipeline completo
 
 
-python3 bridge/main.py run
+./run.sh
 ```
 
 Eso lee `src/idea.cpp`, genera archivos en `output/generated/` y los ejecuta.
@@ -85,14 +85,14 @@ GitHub Actions ejecuta `./run.sh --ci test` en cada push y pull request.
 
 | Comando | Qué hace |
 |---|---|
-| `python3 bridge/main.py run` | Pipeline completo |
-| `python3 bridge/main.py interpret` | C++ → AST |
-| `python3 bridge/main.py generate --lang python` | Genera Python |
-| `python3 bridge/main.py generate --lang js` | Genera JavaScript |
-| `python3 bridge/main.py generate --lang rust` | Genera Rust |
-| `python3 bridge/main.py compile` | Compila el Rust generado |
-| `python3 bridge/main.py clean` | Limpia generados y el log |
-| `python3 bridge/main.py --help` | Ayuda |
+| `./run.sh` | Pipeline completo |
+| `./run.sh interpret` | C++ → AST |
+| `./run.sh generate --lang python` | Genera Python |
+| `./run.sh generate --lang js` | Genera JavaScript |
+| `./run.sh generate --lang rust` | Genera Rust |
+| `./run.sh compile` | Compila el Rust generado |
+| `./run.sh clean` | Limpia generados y el log |
+| `./run.sh --help` | Ayuda |
 
 ### Resultados
 
@@ -198,7 +198,10 @@ Cada corrida del pipeline queda en `output/logs.txt`:
 [2026-09-06 05:57:00] [OK] Pipeline completado
 ```
 
-## Qué no puede hacer (todavía)
+## Alcance y limitaciones
+
+El proyecto soporta un **subconjunto de C++ simple**. Está pensado para ejemplos
+educativos y prototipos, no para traducir proyectos C++ completos.
 
 - Leer C++ complejo con templates o herencia múltiple
 - Traducir punteros o referencias complejas
