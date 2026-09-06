@@ -47,6 +47,7 @@ De C++ a Python, JavaScript y Rust, sin perder la cabeza.
 - [Alcance y Limitaciones](#alcance-y-limitaciones)
 - [Dónde Meterle Mano](#dónde-meterle-mano)
 - [Contribuir](#contribuir)
+- [Historial de cambios](#historial-de-cambios)
 - [Licencia](#licencia)
 
 ---
@@ -99,6 +100,7 @@ esclarificador/
 │   ├── index.html
 │   └── *.gif
 ├── CHANGELOG.md                    # Historial de versiones
+├── CONTRIBUTING.md                 # Guía para contribuir
 ├── run.sh                          # Enlace a scripts/run.sh
 ├── LICENSE
 └── README.md
@@ -401,7 +403,13 @@ los permisos y condiciones completos.
 
 Consultá `CHANGELOG.md` para conocer la evolución del proyecto.
 
-    Hacer un pull request
+## Historial de cambios
+
+El historial completo de versiones y cambios está disponible en
+[`CHANGELOG.md`](CHANGELOG.md).
+
+Para contribuir al proyecto, consultá también
+[`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## 🔒 Auditoría y Seguridad
 
