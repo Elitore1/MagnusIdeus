@@ -1,0 +1,14 @@
+# GitHub Pages Configuration
+title: Esclarificador
+description: Transpilador experimental de C++ a Python, JavaScript y Rust
+author: Tu Usuario
+theme: jekyll-theme-minimal
+
+# Social links
+github_username: tu-usuario
+
+# Exclude files from site
+exclude:
+  - .gitignore
+  - README.md
+  - LICENSE
