@@ -39,13 +39,33 @@ class TestPipeline(unittest.TestCase):
     
     def test_generated_python_executes(self):
         """Verificar que el código Python generado se ejecuta"""
-        result = subprocess.run(
-            ["python3", "output/generated/idea.py"],
+        root = Path(__file__).parent.parent
+        generated = subprocess.run(
+            ["python3", "bridge/generator.py", "--lang", "python"],
             capture_output=True,
             text=True,
-            cwd=Path(__file__).parent.parent
+            cwd=root
         )
-        self.assertEqual(result.returncode, 0, f"Error: {result.stderr}")
+        self.assertEqual(
+            generated.returncode,
+            0,
+            f"Error generando Python: {generated.stderr}"
+        )
+
+        idea_py = root / "output" / "generated" / "idea.py"
+        self.assertTrue(idea_py.exists(), f"El archivo {idea_py} no existe")
+
+        result = subprocess.run(
+            ["python3", str(idea_py)],
+            capture_output=True,
+            text=True,
+            cwd=root
+        )
+        self.assertEqual(
+            result.returncode,
+            0,
+            f"Error ejecutando Python: {result.stderr}"
+        )
     
     def test_ast_json_generated(self):
         """Verificar que se genera ast.json"""
