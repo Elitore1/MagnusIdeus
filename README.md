@@ -129,9 +129,11 @@ chmod +x run.sh
 
 # Ejecutar el pipeline completo
 ./run.sh
+```
 
-🚀 Uso Rápido
-bash
+## 🚀 Uso Rápido
+
+```bash
 
 # Pipeline completo (interpreta, genera, compila y ejecuta)
 ./run.sh
@@ -144,20 +146,25 @@ bash
 
 # Ver el log completo al finalizar
 ./run.sh --show-log
+```
 
-🛠️ Wrapper run.sh
+## 🛠️ Wrapper `run.sh`
 
 El wrapper raíz delega en scripts/run.sh y ofrece una forma cómoda de ejecutar el pipeline y sus verificaciones.
-Opciones del wrapper
-Opción	Qué hace
---help, -h	Muestra ayuda y ejemplos
---show-log	Muestra el log completo al finalizar
---no-log	No muestra el log al finalizar
---verbose, -v	Pasa --verbose a bridge/main.py y muestra log completo
---ci	Modo CI (sin colores, output minimalista)
---test-runner	Forzar runner de tests (pytest, unittest, custom)
-Ejemplos
-bash
+### Opciones del wrapper
+
+| Opción | Qué hace |
+|---|---|
+| `--help`, `-h` | Muestra ayuda y ejemplos |
+| `--show-log` | Muestra el log completo al finalizar |
+| `--no-log` | No muestra el log al finalizar |
+| `--verbose`, `-v` | Modo detallado |
+| `--ci` | Modo CI sin colores |
+| `--test-runner` | Fuerza `pytest`, `unittest` o `custom` |
+
+### Ejemplos
+
+```bash
 
 ./run.sh                  # Pipeline completo
 ./run.sh --verbose        # Pipeline con salida detallada
@@ -165,30 +172,36 @@ bash
 ./run.sh --ci test        # Ejecuta los tests en modo CI
 ./run.sh --test-runner unittest test
 ./run.sh --help           # Muestra ayuda
+```
 
---test-runner acepta auto, pytest, unittest o custom. En modo auto se elige el runner disponible según los archivos del proyecto.
-📋 Comandos Disponibles
-Comando	Qué hace
-./run.sh	Pipeline completo
-./run.sh interpret	C++ → AST
-./run.sh generate --lang python	Genera Python
-./run.sh generate --lang js	Genera JavaScript
-./run.sh generate --lang rust	Genera Rust
-./run.sh compile	Compila el Rust generado
-./run.sh clean	Limpia generados y el log
-./run.sh test	Ejecuta tests (auto-detecta)
-./run.sh test --test-runner pytest	Forzar pytest
-./run.sh test --test-runner unittest	Forzar unittest
-./run.sh --help	Ayuda
-Ejecutar resultados
-bash
+--test-runner acepta `auto`, `pytest`, `unittest` o `custom`. En modo `auto`
+se elige el runner disponible según los archivos del proyecto.
+
+## 📋 Comandos Disponibles
+
+| Comando | Qué hace |
+|---|---|
+| `./run.sh` | Pipeline completo |
+| `./run.sh interpret` | C++ → AST |
+| `./run.sh generate --lang python` | Genera Python |
+| `./run.sh generate --lang js` | Genera JavaScript |
+| `./run.sh generate --lang rust` | Genera Rust |
+| `./run.sh compile` | Compila el Rust generado |
+| `./run.sh clean` | Limpia generados y el log |
+| `./run.sh test` | Ejecuta tests |
+| `./run.sh --help` | Ayuda |
+
+### Ejecutar resultados
+
+```bash
 
 python3 output/generated/idea.py       # Ejecutar Python
 node output/generated/idea.js          # Ejecutar JavaScript
 rustc output/generated/idea.rs -o output/generated/idea  # Compilar Rust
 ./output/generated/idea                # Ejecutar Rust
+```
 
-🧪 Tests
+## 🧪 Tests
 
 El proyecto incluye una suite de tests automatizados que validan:
 
@@ -204,8 +217,9 @@ El proyecto incluye una suite de tests automatizados que validan:
 
     Ejecución del código generado
 
-Ejecutar tests
-bash
+### Ejecutar tests
+
+```bash
 
 # Auto-detección del runner
 ./run.sh test
@@ -218,24 +232,29 @@ bash
 
 # Modo CI
 ./run.sh --ci test
+```
 
-Cobertura actual
-Test	Estado
-Carga de mappings	✅
-Lectura de C++	✅
-Extracción de tokens	✅
-Generación de AST	✅
-Generación Python	✅
-Generación JavaScript	✅
-Generación Rust	✅
-Ejecución Python	✅
+### Cobertura actual
 
-    Sugerencia: Próximamente se agregarán tests para ejecución de JavaScript y compilación/ejecución de Rust.
+| Test | Estado |
+|---|---|
+| Carga de mappings | ✅ |
+| Lectura de C++ | ✅ |
+| Extracción de tokens | ✅ |
+| Generación de AST | ✅ |
+| Generación Python | ✅ |
+| Generación JavaScript | ✅ |
+| Generación Rust | ✅ |
+| Ejecución Python | ✅ |
 
-🧪 Personalizar la Traducción
+La ejecución de JavaScript y la compilación/ejecución de Rust se validan en el
+pipeline completo y en CI cuando las herramientas están disponibles.
 
-config/mappings.json es el diccionario de traducción. Si una clase C++ debe llamarse distinto en Python, cambia el valor de "python":
-json
+## 🧪 Personalizar la Traducción
+
+config/mappings.json es el diccionario de traducción. Si una clase C++ debe llamarse distinto en Python, cambia el valor de `"python"`:
+
+```json
 
 {
   "abstracciones": {
@@ -254,20 +273,24 @@ json
     }
   }
 }
+```
 
-📖 Ejemplo
+## 📖 Ejemplo
 
-Entrada (src/idea.cpp):
-cpp
+Entrada (`src/idea.cpp`):
+
+```cpp
 
 class Tanger {
 public:
     std::string problema = "renderizado_3d";
     void diagnosticar() { std::cout << "Problema identificado\n"; }
 };
+```
 
 Salida Python:
-python
+
+```python
 
 class Problem:
     def __init__(self):
@@ -275,14 +298,17 @@ class Problem:
     def diagnosticar(self):
         print("🔍 Diagnosticando Tanger...")
         return True
+```
 
 Salida JavaScript:
-javascript
+
+```javascript
 
 class Problem {
     constructor() {
         this.problema = "";
     }
+    ```
     diagnosticar() {
         console.log("🔍 Diagnosticando Tanger...");
         return true;
@@ -290,7 +316,8 @@ class Problem {
 }
 
 Salida Rust:
-rust
+
+```rust
 
 struct Problem {
     problema: String,
@@ -305,11 +332,13 @@ impl Problem {
         println!("🔍 Diagnosticando Problem...");
     }
 }
+```
 
-📊 Logs
+## 📊 Logs
 
-Cada corrida del pipeline queda en output/logs.txt:
-text
+Cada corrida del pipeline queda en `output/logs.txt`:
+
+```text
 
 [2026-09-06 05:56:59] [INFO] === NUEVA EJECUCIÓN ===
 [2026-09-06 05:56:59] [STEP] PASO 1: Interpretando C++...
@@ -320,6 +349,7 @@ text
 [2026-09-06 05:57:00] [OK] Binario generado
 [2026-09-06 05:57:00] [STEP] PASO 4: Ejecutando ejemplos...
 [2026-09-06 05:57:00] [OK] Pipeline completado
+```
 
 ⚠️ Alcance y Limitaciones
 
