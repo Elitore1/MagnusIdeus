@@ -1,0 +1,90 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Rust
+target/
+*.rs.bk
+*.rlib
+*.prof*
+*.pdb
+*.dSYM
+**/*.rs.bk
+output/generated/idea
+output/generated/idea_new
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs y archivos grandes
+output/generated/idea
+output/generated/idea_new
+output/generated/*.pyc
+*.log
+*.bak
+*.tmp
+
+# Scripts de depuración (eliminarlos del repo)
+*.sh
+!run.sh
+!commands.sh
+!build.sh
+
+# Directorios temporales
+intermediate/
+output/generated/
+!output/generated/idea.py
+!output/generated/idea.js
+!output/generated/idea.rs
+
+# Archivos de backup
+*.bak
+*.old
+*.orig
+*~
+
+# Archivos específicos a excluir
+pipeline/
+MagnusIdeus/
+run_tasks.py
+status.json
+explorer.sh
+*.sh
+!run.sh
+!commands.sh
+
+# Archivos grandes
+*.pkl
+*.db
+*.sqlite3
+*.tar.gz
+*.zip
+
+# Secretos
+.env
+.secrets
+*.pem
+*.key
+
+# Virtual Environment
+.venv/
+venv/
+env/

@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "abstracciones": {
+    "Tanger": {
+      "descripcion": "Identificación del problema",
+      "cpp": "std::problem",
+      "python": "Problem",
+      "js": "Problem",
+      "rust": "Problem",
+      "atributos": ["problema", "severidad", "contexto"],
+      "metodos": ["diagnosticar", "identificar"]
+    },
+    "Espejo": {
+      "descripcion": "Análisis y reflexión",
+      "cpp": "std::reflect",
+      "python": "Reflect",
+      "js": "Reflect",
+      "rust": "Reflect",
+      "atributos": ["analisis", "contexto"],
+      "metodos": ["analizar", "razonar"]
+    },
+    "Modulus": {
+      "descripcion": "Puente entre idea y lógica",
+      "cpp": "std::bridge",
+      "python": "Bridge",
+      "js": "Bridge",
+      "rust": "Bridge",
+      "atributos": ["origen", "destino"],
+      "metodos": ["traducir", "mapear"]
+    },
+    "Cayo": {
+      "descripcion": "Planificación",
+      "cpp": "std::plan",
+      "python": "Plan",
+      "js": "Plan",
+      "rust": "Plan",
+      "atributos": ["pasos", "estrategia"],
+      "metodos": ["planificar", "diseñar"]
+    },
+    "Barca": {
+      "descripcion": "Ejecución irreversible",
+      "cpp": "std::execute",
+      "python": "Execute",
+      "js": "Execute",
+      "rust": "Execute",
+      "atributos": ["estado", "resultado"],
+      "metodos": ["ejecutar", "run"]
+    }
+  },
+  "std_namespaces": {
+    "chrono": {
+      "descripcion": "Manejo de tiempo",
+      "python": "datetime",
+      "js": "Date",
+      "rust": "std::time",
+      "tipos": ["clock", "duration", "time_point"]
+    },
+    "vector": {
+      "descripcion": "Contenedor dinámico",
+      "python": "list",
+      "js": "Array",
+      "rust": "std::vec::Vec",
+      "tipos": ["push", "pop", "size"]
+    },
+    "map": {
+      "descripcion": "Contenedor asociativo",
+      "python": "dict",
+      "js": "Object",
+      "rust": "std::collections::HashMap",
+      "tipos": ["insert", "find", "erase"]
+    },
+    "thread": {
+      "descripcion": "Concurrencia",
+      "python": "threading",
+      "js": "Worker",
+      "rust": "std::thread",
+      "tipos": ["spawn", "join"]
+    }
+  },
+  "tipos_datos": {
+    "string": {"python": "str", "js": "string", "rust": "String"},
+    "int": {"python": "int", "js": "number", "rust": "i32"},
+    "float": {"python": "float", "js": "number", "rust": "f64"},
+    "bool": {"python": "bool", "js": "boolean", "rust": "bool"},
+    "vector": {"python": "list", "js": "Array", "rust": "Vec<String>"}
+  }
+}
