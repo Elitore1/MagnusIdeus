@@ -45,5 +45,25 @@ class TestInterpreter(unittest.TestCase):
         self.assertIn("abstracciones", ast)
         self.assertGreater(len(ast["abstracciones"]), 0)
 
+    def test_unknown_classes_are_ignored(self):
+        """Las clases fuera de mappings no deben entrar al AST."""
+        source = "class Unknown { public: void run() {} };"
+        tokens = self.interpreter.extract_tokens_from_cpp(source)
+        self.assertEqual(
+            [token for token in tokens if token.get("tipo") == "abstraccion"],
+            []
+        )
+
+    def test_supported_includes_are_preserved(self):
+        """Los includes configurados deben producir tokens de namespace."""
+        source = "#include <chrono>\n#include <vector>\n"
+        tokens = self.interpreter.extract_tokens_from_cpp(source)
+        namespaces = {
+            token["nombre"]
+            for token in tokens
+            if token.get("tipo") == "std_namespace"
+        }
+        self.assertEqual(namespaces, {"chrono", "vector"})
+
 if __name__ == "__main__":
     unittest.main()

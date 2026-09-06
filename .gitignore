@@ -1,32 +1,43 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
 *.so
 .Python
-env/
-venv/
 .venv/
-ENV/
-env.bak/
-venv.bak/
+venv/
+env/
 *.egg-info/
 dist/
 build/
-*.egg
 
 # Rust
 target/
 *.rs.bk
-*.rlib
-*.prof*
-*.pdb
-*.dSYM
-**/*.rs.bk
 output/generated/idea
 output/generated/idea_new
 
-# IDE
+# Generated pipeline artifacts
+intermediate/
+output/generated/*
+!output/generated/.gitkeep
+output/generated_code.py
+output/logs.txt
+
+# Temporary media and files
+*.tmp
+*.bak
+*.old
+*.orig
+*.log
+*.pkl
+*.db
+*.sqlite3
+*.tar.gz
+*.zip
+*.gif
+!docs/*.gif
+
+# Editors and operating-system files
 .vscode/
 .idea/
 *.swp
@@ -34,73 +45,15 @@ output/generated/idea_new
 *~
 .DS_Store
 
-# Logs y archivos grandes
-output/generated/idea
-output/generated/idea_new
-output/generated/*.pyc
-*.log
-*.bak
-*.tmp
-
-# Scripts de depuración (eliminarlos del repo)
-*.sh
-!run.sh
-!commands.sh
-!build.sh
-
-# Directorios temporales
-intermediate/
-output/generated/
-!output/generated/idea.py
-!output/generated/idea.js
-!output/generated/idea.rs
-
-# Archivos de backup
-*.bak
-*.old
-*.orig
-*~
-
-# Archivos específicos a excluir
-pipeline/
-MagnusIdeus/
-run_tasks.py
-status.json
-explorer.sh
-*.sh
-!run.sh
-!commands.sh
-
-# Archivos grandes
-*.pkl
-*.db
-*.sqlite3
-*.tar.gz
-*.zip
-
-# Secretos
+# Secrets
 .env
 .secrets
 *.pem
 *.key
 
-# Virtual Environment
-.venv/
-venv/
-env/
-
-# Archivos generados
-intermediate/
-output/generated/idea
-output/generated/ast_summary.txt
-output/generated_code.py
-output/logs.txt
-
-# Scripts de depuración
-fueraContextoHistorico1/
+# Project-specific temporary content
+pipeline/
+MagnusIdeus/
+status.json
 run_tasks.py
-*.sh
-!run.sh
-
-# Histórico
 src/legacy/

@@ -25,8 +25,8 @@ De C++ a Python, JavaScript y Rust, sin perder la cabeza.
 
 ## 🎥 Demo del Pipeline
 
-![Pipeline en acción](Peek%202026-09-06%2009-20.gif)
-![Pipeline en acción X2](Peek%202026-09-06%2009-24.gif)
+![Pipeline en acción](docs/Peek%202026-09-06%2009-20.gif)
+![Pipeline en acción X2](docs/Peek%202026-09-06%2009-24.gif)
 
 
 
@@ -352,11 +352,19 @@ SÍ soporta:
 
 🤝 Contribuir
 
-    Hacer fork del repositorio
+1. Hacé fork del repositorio y creá una rama (`git checkout -b mi-mejora`).
+2. Ejecutá `./run.sh --ci test` antes de enviar cambios.
+3. Documentá los cambios relevantes y abrí un pull request.
 
-    Crear una rama (git checkout -b mi-mejora)
+Para nuevas funcionalidades del parser o generador, añadí tests que cubran el
+caso normal y sus entradas límite.
 
-    Hacer los cambios
+## Licencia
+
+El proyecto se distribuye bajo la licencia MIT. Consultá `LICENSE` para conocer
+los permisos y condiciones completos.
+
+Consultá `CHANGELOG.md` para conocer la evolución del proyecto.
 
     Hacer un pull request
 
