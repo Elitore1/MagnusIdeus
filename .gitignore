@@ -88,3 +88,19 @@ explorer.sh
 .venv/
 venv/
 env/
+
+# Archivos generados
+intermediate/
+output/generated/idea
+output/generated/ast_summary.txt
+output/generated_code.py
+output/logs.txt
+
+# Scripts de depuración
+fueraContextoHistorico1/
+run_tasks.py
+*.sh
+!run.sh
+
+# Histórico
+src/legacy/
