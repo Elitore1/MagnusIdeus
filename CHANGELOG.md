@@ -26,7 +26,8 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - [ ] Auditar dependencias con `safety`.
 - [ ] Implementar hooks de `pre-commit`.
 - [ ] Configurar `codecov` con un umbral de cobertura.
-- [ ] Activar CodeQL y Secret Scanning desde la configuración del repositorio.
+- [x] Configurar CodeQL para analizar Python y JavaScript en CI.
+- [x] Activar Secret Scanning y push protection en el repositorio.
 
 ---
 
