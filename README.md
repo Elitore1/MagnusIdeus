@@ -422,7 +422,7 @@ riesgo de supply chain.
 |---|---|---|
 | GitHub Actions | CI/CD | ✅ Versiones fijadas; Rust fijado a SHA |
 | Dependabot | Actualizaciones de Actions | ✅ Configurado semanalmente |
-| CodeQL | Análisis de seguridad | ⚙️ Activar en **Settings → Code security** |
+| CodeQL | Análisis de seguridad | ✅ Workflow configurado para Python y JavaScript |
 | Secret scanning | Detección de secretos | ✅ Activo con push protection |
 | Auditoría CI | Patrones de secretos y dependencias | ✅ Ejecutada en cada workflow |
 
@@ -436,9 +436,9 @@ riesgo de supply chain.
 - ✅ Las dependencias se auditan con `pip-audit`, `npm audit` o `cargo audit`
   cuando existen manifiestos para el ecosistema correspondiente.
 
-Secret Scanning y push protection están activos en el repositorio. CodeQL es una
-función de seguridad de GitHub que todavía debe habilitarse desde la
-configuración del repositorio.
+Secret Scanning y push protection están activos en el repositorio. CodeQL queda
+configurado mediante `.github/workflows/codeql.yml` para analizar Python y
+JavaScript en cada cambio a `main`, pull requests y semanalmente.
 
 📄 Licencia
 
